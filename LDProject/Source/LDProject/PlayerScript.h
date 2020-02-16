@@ -8,6 +8,8 @@
 #include "Runtime/Engine/Classes/Components/CapsuleComponent.h"
 #include "PlayerScript.generated.h"
 
+class UInputComponent;
+
 UCLASS()
 class LDPROJECT_API APlayerScript : public ACharacter
 {

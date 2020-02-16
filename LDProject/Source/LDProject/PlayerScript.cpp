@@ -33,9 +33,11 @@ void APlayerScript::Tick(float DeltaTime)
 }
 
 // Called to bind functionality to input
-void APlayerScript::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void APlayerScript::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	check(PlayerInputComponent)
 
+	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
+	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
 }
 
