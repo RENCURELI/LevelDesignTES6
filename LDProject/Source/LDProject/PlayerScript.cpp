@@ -16,6 +16,7 @@ APlayerScript::APlayerScript()
 	CameraComponent->RelativeLocation = FVector(-39.56f, 1.75f, 64.f);
 	CameraComponent->bUsePawnControlRotation = true;
 
+	g_jumpHeight = 500.f;
 }
 
 // Called when the game starts or when spawned
@@ -45,6 +46,10 @@ void APlayerScript::SetupPlayerInputComponent(class UInputComponent* PlayerInput
 	//Camera controls
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
+
+	//Actions
+	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &APlayerScript::Interact);
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &APlayerScript::Jump);
 }
 
 
@@ -62,4 +67,15 @@ void APlayerScript::MoveRight(float val)
 	{
 		AddMovementInput(GetActorRightVector(), val);
 	}
+}
+
+void APlayerScript::Interact()
+{
+	//Add logic
+	UE_LOG(LogTemp, Warning, TEXT("Interact"));
+}
+
+void APlayerScript::Jump()
+{
+	APlayerScript::LaunchCharacter(FVector(0, 0, g_jumpHeight), false, true);
 }

@@ -35,5 +35,12 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION()
+		void Interact();
+
+	void Jump();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float g_jumpHeight;
 
 };
