@@ -25,6 +25,7 @@ void APlayerScript::BeginPlay()
 	
 }
 
+
 // Called every frame
 void APlayerScript::Tick(float DeltaTime)
 {
@@ -37,7 +38,28 @@ void APlayerScript::SetupPlayerInputComponent(class UInputComponent* PlayerInput
 {
 	check(PlayerInputComponent)
 
+	//Movement
+	PlayerInputComponent->BindAxis("Forward", this, &APlayerScript::MoveForward);
+	PlayerInputComponent->BindAxis("Right", this, &APlayerScript::MoveRight);
+
+	//Camera controls
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
 	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
 }
 
+
+void APlayerScript::MoveForward(float val)
+{
+	if (val != 0)
+	{
+		AddMovementInput(GetActorForwardVector(), val);
+	}
+}
+
+void APlayerScript::MoveRight(float val)
+{
+	if (val != 0)
+	{
+		AddMovementInput(GetActorRightVector(), val);
+	}
+}
