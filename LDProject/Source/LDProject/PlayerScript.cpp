@@ -17,6 +17,8 @@ APlayerScript::APlayerScript()
 	CameraComponent->bUsePawnControlRotation = true;
 
 	g_jumpHeight = 500.f;
+	g_walkSpeed = 500;
+	g_sprintSpeed = 1000;
 }
 
 // Called when the game starts or when spawned
@@ -50,6 +52,8 @@ void APlayerScript::SetupPlayerInputComponent(class UInputComponent* PlayerInput
 	//Actions
 	PlayerInputComponent->BindAction("Interact", IE_Pressed, this, &APlayerScript::Interact);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &APlayerScript::Jump);
+	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &APlayerScript::Sprint);
+	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &APlayerScript::Walk);
 }
 
 
@@ -78,4 +82,14 @@ void APlayerScript::Interact()
 void APlayerScript::Jump()
 {
 	APlayerScript::LaunchCharacter(FVector(0, 0, g_jumpHeight), false, true);
+}
+
+void APlayerScript::Sprint()
+{
+	GetCharacterMovement()->MaxWalkSpeed = g_sprintSpeed;	
+}
+
+void APlayerScript::Walk()
+{
+	GetCharacterMovement()->MaxWalkSpeed = g_walkSpeed;
 }

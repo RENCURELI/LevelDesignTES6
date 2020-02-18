@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "Camera/CameraComponent.h"
 #include "Runtime/Engine/Classes/Components/CapsuleComponent.h"
+#include "Runtime/Engine/Classes/GameFramework/CharacterMovementComponent.h"
 #include "PlayerScript.generated.h"
 
 class UInputComponent;
@@ -40,7 +41,19 @@ public:
 
 	void Jump();
 
+	UFUNCTION()
+		void Sprint();
+
+	UFUNCTION()
+		void Walk();
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float g_jumpHeight;
+
+	UPROPERTY(EditAnywhere)
+		int g_walkSpeed;
+
+	UPROPERTY(EditAnywhere)
+		int g_sprintSpeed;
 
 };
